@@ -118,6 +118,21 @@ namespace EventSourceLib
             return isReplayEvent;
         }
 
+
+        /// <summary>
+        /// Send an event
+        /// </summary>
+        /// <param name="eventData"></param>
+        protected void SendEvent(IEvent eventData)
+        {
+            //we don't need to send the event if it is
+            //a replay event
+            if (!IsReplayEvent())
+            {
+                eventProcessor.Process(eventData, false);
+            }
+        }
+
         public abstract void Reset();
 
 
