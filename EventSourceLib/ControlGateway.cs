@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EventSourceLib
 {
-    public class ControlGateway : IControlGateway
+    public sealed class ControlGateway : IControlGateway
     {
         private ICollection<IEvent> eventList;
 

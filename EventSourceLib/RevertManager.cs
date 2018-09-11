@@ -1,6 +1,6 @@
 ﻿namespace EventSourceLib
 {
-    public class RevertManager
+    public sealed class RevertManager
     {
         private readonly IControlGateway controlGateway;
 

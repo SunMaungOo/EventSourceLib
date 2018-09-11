@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EventSourceLib
 {
-    public class SerializeEventSaver : IEventSaver
+    public sealed class SerializeEventSaver : IEventSaver
     {
         private readonly string fileName;
 

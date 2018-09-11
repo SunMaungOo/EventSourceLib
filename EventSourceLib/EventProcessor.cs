@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace EventSourceLib
 {
-    public class EventProcessor : IEventProcessor
+    public sealed class EventProcessor : IEventProcessor
     {
         private IList<IEventProcessable> subscriberList;
 
