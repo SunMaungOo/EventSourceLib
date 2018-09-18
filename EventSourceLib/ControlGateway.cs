@@ -31,8 +31,6 @@ namespace EventSourceLib
 
         public void Log(IEvent eventData)
         {
-            //we should not log when in reply mode
-
             if (IsLogEnabled())
             {
                 eventList.Add(eventData);

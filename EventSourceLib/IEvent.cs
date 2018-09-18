@@ -1,7 +1,7 @@
 ﻿namespace EventSourceLib
 {
     /// <summary>
-    /// Common base class for event source
+    /// Common base class for event
     /// </summary>
     public interface IEvent
     {

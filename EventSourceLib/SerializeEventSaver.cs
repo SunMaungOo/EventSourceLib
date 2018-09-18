@@ -5,26 +5,42 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EventSourceLib
 {
+    /// <summary>
+    /// Class which store the serialize event object
+    /// </summary>
     public sealed class SerializeEventSaver : IEventSaver
     {
         private readonly string fileName;
 
         private readonly IControlGateway controlGateway;
 
+        private readonly bool isOverwrite;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="fileName">file name to save the serialize event</param>
         /// <param name="controlGateway"></param>
-        public SerializeEventSaver(string fileName,IControlGateway controlGateway)
+        /// <param name="isOverwrite">Ovewrite the file if exist</param>
+        public SerializeEventSaver(string fileName,IControlGateway controlGateway,
+            bool isOverwrite=true)
         {
             this.fileName = fileName;
 
             this.controlGateway = controlGateway;
+
+            this.isOverwrite = isOverwrite;
         }
 
         public SerializeEventSaver(string fileName = "events.txt"):this(fileName,
             Framework.GetControlGateway())
+        {
+
+        }
+
+        public SerializeEventSaver(string fileName,bool isOverwrite):this(fileName,
+            Framework.GetControlGateway(),
+            isOverwrite)
         {
 
         }
@@ -70,10 +86,7 @@ namespace EventSourceLib
         {
             try
             {
-                if (File.Exists(fileName))
-                {
-                    File.Delete(fileName);
-                }
+                DeleteFile(fileName);
 
                 using (Stream stream = File.Open(fileName, FileMode.Create, FileAccess.Write))
                 {
@@ -87,6 +100,21 @@ namespace EventSourceLib
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Delete the file if exist
+        /// </summary>
+        /// <param name="fileName"></param>
+        private void DeleteFile(string fileName)
+        {
+            if(isOverwrite)
+            {
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+            }
         }
 
         private IList<IEvent> GetEvents()
