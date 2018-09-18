@@ -8,7 +8,7 @@
 
         private static IEventSaver eventSaver;
 
-        private static bool isEventSaverInjected = false;
+        private static bool isEventSaverInjected;
 
         public static IControlGateway GetControlGateway()
         {
@@ -55,6 +55,8 @@
         public static void InjectEventSaver(IEventSaver eventSaver)
         {
             Framework.eventSaver = eventSaver;
+
+            isEventSaverInjected = true;
         }
     }
 }
